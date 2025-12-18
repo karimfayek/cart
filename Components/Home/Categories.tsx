@@ -1,9 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { FlatList, Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
-
+import { FlatList, Image, ImageSourcePropType, Pressable, StyleSheet, Text, View } from "react-native";
 export default function Categories (){
-      const image =require('../../assets/images/hero.jpg')
+    const navigation= useNavigation();
+    const image =require('../../assets/images/hero.jpg')
 const [cats , setCats] = useState([])
 const [error , seterror] = useState(null)
 type cat = {
@@ -34,9 +35,20 @@ const Cat = ({title , image} : CatProbs)=> (
     <View>
         <View style={styles.card}>
             <Image source={image} style={styles.catImage} />
-            <Text numberOfLines={2} ellipsizeMode='tail' style={{  maxWidth:70, textAlign:'center'}}>
+           
+                <Pressable 
+                onPress = {
+                    () => {
+                        navigation.navigate('Category',{
+                            title: title
+                        })
+                    }
+                    }
+                    >
+                         <Text numberOfLines={2} ellipsizeMode='tail' style={styles.catTitle}>
                 {title}
             </Text>
+            </Pressable>
         </View>
     </View>
 )
@@ -56,6 +68,7 @@ const Cat = ({title , image} : CatProbs)=> (
             renderItem = {({item}) => <Cat  title={item} image={image} />}
             keyExtractor = {item => item }
             horizontal
+            contentContainerStyle= {{paddingHorizontal : 10}}
             />
         </View>
     )
@@ -64,7 +77,8 @@ const styles = StyleSheet.create({
     container :{
         flex : 1,
         marginTop:10,
-        backgroundColor:'#cccc'
+        backgroundColor: '#f7f7f7',
+        paddingVertical:10
     },
     title :{
         fontWeight: 'bold',
@@ -75,19 +89,29 @@ const styles = StyleSheet.create({
     catImage:{
         width: 50,
         height:50,
-        borderRadius:'100%',
+        borderRadius:25,
         backgroundColor:'gray'
     },
     card:{
-        borderWidth:1,
-        borderColor:'gray',
-        justifyContent:'center',
-        alignItems:'center',
-        padding:5,
-        marginRight:6,
-        maxWidth:150,
-        backgroundColor:'#fff',
-        elevation: 40,
-        minHeight:100
-    }
+        width: 90,
+    height: 110,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+
+    // Shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+    },
+    catTitle: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#333',
+    marginTop:5
+  },
 })

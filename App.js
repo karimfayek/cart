@@ -1,0 +1,33 @@
+import CategoryScreen from "@/Screens/CategoryScreen";
+import HomeScreen from "@/Screens/HomeScreen";
+import { createStaticNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName : 'Home',
+  screenOptions :{
+    headerStyle : {backgroundColor: 'white'}
+  },
+  screens :{
+    Home :{
+        screen : HomeScreen,
+        options : {
+            title : 'Cart Home'
+        }
+    },
+    categories : HomeScreen,
+    Category : CategoryScreen
+  }
+})
+const Navigation = createStaticNavigation(RootStack)
+
+export default function Index() {
+  return (
+    <SafeAreaProvider>
+      <Navigation />     
+    </SafeAreaProvider>
+  );
+}
+
