@@ -1,5 +1,6 @@
 import CategoryScreen from "@/Screens/CategoryScreen";
 import HomeScreen from "@/Screens/HomeScreen";
+import ProductScreen from "@/Screens/ProductScreen";
 import { createStaticNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -18,7 +19,8 @@ const RootStack = createNativeStackNavigator({
         }
     },
     categories : HomeScreen,
-    Category : CategoryScreen
+    Category : CategoryScreen,
+    Product: ProductScreen 
   }
 })
 const Navigation = createStaticNavigation(RootStack)

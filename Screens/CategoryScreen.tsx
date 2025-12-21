@@ -1,6 +1,7 @@
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Dimensions, FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function CategoryScreen({ route }) {
   const { title } = route.params ?? {};
@@ -33,11 +34,24 @@ if (loading) {
         <ActivityIndicator animating={loading} />
     )
 }
+const navigation = useNavigation()
 const RenderItem = ({item})=> (
-<View>
+<View style={styles.item} >
+    <Pressable onPress={() => navigation.navigate('Product' ,{
+        id : item.id
+    }) }>
+
     <Image source={{uri:item.image}} style={styles.image}
      resizeMode="contain"
     />
+    <Text numberOfLines={2} style={styles.title}>
+        {item.title}
+    </Text>
+     <Text style={styles.price}>
+        {item.price}
+        <Text style={{fontWeight:'normal'}}>{' '}$</Text>
+    </Text>
+    </Pressable>
 </View>
 )
 
@@ -48,7 +62,6 @@ const RenderItem = ({item})=> (
      numColumns={2}
      keyExtractor={ item => item.id.toString()}
      renderItem={RenderItem}
-     columnWrapperStyle = {{borderWidth:1}}
      ListHeaderComponent={
         <>
      <Text>Header 1</Text>
@@ -64,7 +77,26 @@ const RenderItem = ({item})=> (
     const windowWidth = Dimensions.get('window').width
 const styles = StyleSheet.create({
     image : {
-        width:( windowWidth /2 ) - 20,
-        height : 250
+        width:( windowWidth /2 ) - 30,
+        height : 250,
+        backgroundColor: '#f8f8f9' ,
+        margin: 5
+    },
+    title:{
+        width:( windowWidth /2 ) - 30,
+        textAlign:'center',
+        position:'relative',
+        marginBottom:25
+    },
+    item: {
+        backgroundColor: '#fff',
+        marginBottom:10,
+        padding:5
+    },
+    price:{
+        fontWeight: 'bold',
+        position:'absolute',
+        bottom: 0,
+        marginBottom: 10
     }
 })
