@@ -1,11 +1,15 @@
+import { ScrollView } from "react-native";
 import Categories from "../Components/Home/Categories";
 import Hero from "../Components/Home/Hero";
 
-export default function HomeScreen(){
+export default function HomeScreen() {
     return (
         <>
-        <Hero />
-        <Categories />
+            <ScrollView>
+
+                <Hero />
+                <Categories />
+            </ScrollView>
         </>
     )
 }

@@ -4,32 +4,35 @@ import ProductScreen from "@/Screens/ProductScreen";
 import { createStaticNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
+import { Provider } from "react-redux";
+import { Store } from "./store";
 
 const RootStack = createNativeStackNavigator({
-  initialRouteName : 'Home',
-  screenOptions :{
-    headerStyle : {backgroundColor: 'white'}
+  initialRouteName: 'Home',
+  screenOptions: {
+    headerStyle: { backgroundColor: 'white' }
   },
-  screens :{
-    Home :{
-        screen : HomeScreen,
-        options : {
-            title : 'Cart Home'
-        }
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        title: 'Cart Home'
+      }
     },
-    categories : HomeScreen,
-    Category : CategoryScreen,
-    Product: ProductScreen 
+    categories: HomeScreen,
+    Category: CategoryScreen,
+    Product: ProductScreen,
   }
 })
 const Navigation = createStaticNavigation(RootStack)
 
 export default function Index() {
   return (
-    <SafeAreaProvider>
-      <Navigation />     
-    </SafeAreaProvider>
+    <Provider store={Store}>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
