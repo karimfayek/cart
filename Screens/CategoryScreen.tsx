@@ -62,6 +62,8 @@ export default function CategoryScreen({ route }) {
                 numColumns={2}
                 keyExtractor={item => item.id.toString()}
                 renderItem={RenderItem}
+                initialNumToRender={6}
+                windowSize={6}
                 ListHeaderComponent={
                     <>
                         <Text>Header 1</Text>

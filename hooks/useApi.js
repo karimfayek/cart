@@ -5,6 +5,7 @@ const useApi = (url) => {
     const [error , setError] = useState(null)
     const [loading , setLoading] = useState(false)
     const [data , setData] = useState({})
+    const controller = new AbortController();
 const request = async () => {
 
     try {
@@ -21,6 +22,10 @@ const request = async () => {
 }
   useEffect(() => {
     request()
+    
+    //prevent memory leak
+    return controller.abort()
+
   }, [url])
   return { data, loading, request , error };
 }

@@ -24,6 +24,8 @@ const navigation = useNavigation
 
             <View style={styles.buttonContainer}>
                 <TextInput
+                inputMode={'decimal'}
+                keyboardType={'decimal-pad'}
                     value={quantity}
                     onChangeText={(value) => setQuantity(value)}
                     placeholder="Quantity" style={styles.input} />
